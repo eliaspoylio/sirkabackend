@@ -4,9 +4,17 @@ const app = express()
 const authRoute = require('./routes/auth')
 const favRoute = require('./routes/addfav')
 var cors = require('cors')
-require('dotenv').config();
+
+app.use(
+  cors({
+      credentials: true,
+      origin: true
+  })
+);
+app.options('*', cors());
 
 dbURL =  process.env.DB_URI
+port = process.env.PORT || 4201
 
 app.use(cors())
 app.use(express.json())
@@ -28,7 +36,7 @@ app.get('*', (req, res) => {
 db.on("error", (err)=>{console.error(err)})
 db.once("open", () => {console.log("Connected to DB")})
 
-app.listen(4201, () => {console.log("Server listening to port 4201")})
+app.listen(port, () => {console.log("Server listening to port",port)})
 
 
 
