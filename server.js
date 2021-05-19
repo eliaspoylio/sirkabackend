@@ -3,7 +3,6 @@ const mongoose = require("mongoose")
 const app = express()
 const authRoute = require('./routes/auth')
 const favRoute = require('./routes/addfav')
-//const env = require('../env-var');
 var cors = require('cors')
 require('dotenv').config();
 
@@ -18,11 +17,7 @@ app.use('/api/fav', favRoute)
 mongoose.connect(dbURL , {useNewUrlParser: true, useUnifiedTopology: true})
 const db = mongoose.connection
 
-app.use(express.static(process.cwd()+"/dist/sirka/"));
 
-app.get('/', (req,res) => {
-    res.sendFile(process.cwd()+"/dist/sirka/index.html")
-  });
 
 //default
 app.get('*', (req, res) => {
